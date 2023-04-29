@@ -1,28 +1,15 @@
 
 #include <vector>
 #include <iostream>
-using namespace std;
-int maxWater(vector<int> & v) {
-	int left = 0;
-	int right = v.size()-1;
-	int result;
-	while (left < right) {
-		if (v[left] > v[right])
-		{
-			result = max(result, v[right] * (right - left));
-			
-			right--;
-		}
-		else {
-			result = max(result, v[left] * (right - left));
-			left++;
-		}
+#include <algorithm>
+#include <memory>
 
-			
-	
-	}
-	return result;
-}
+#include "MyLinkedList.h"
+//#include <cmath>
+//#include "leecode.h"
+using namespace std;
+/*
+int maxWater(vector<int> & v);
 int main() {
 	std::vector<int> v;
 	v.push_back(10);
@@ -40,4 +27,17 @@ int main() {
 
 	return 0;
 }
+*/
 
+int main() {
+	MyLinkedList *l = new MyLinkedList();
+	l->addAtHead(1);
+	l->addAtHead(2);
+	l->print();
+
+	l->addAtTail(3);
+	l->print();
+
+
+	return 0;
+}
