@@ -1,1 +1,8 @@
-﻿
+﻿  leetcode.cpp
+c:\users\jkang7\downloads\leetcodecpp\leecodecpp\leetcode.cpp(4): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  Generating code
+  2 of 86 functions ( 2.3%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
+  Finished generating code
+  LeecodeCPP.vcxproj -> C:\Users\jkang7\Downloads\leetcodecpp\x64\Release\LeecodeCPP.exe
