@@ -18,10 +18,10 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="leetcode.cpp">
+    <ClCompile Include="MylinkedList.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MylinkedList.cpp">
+    <ClCompile Include="leetcode.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

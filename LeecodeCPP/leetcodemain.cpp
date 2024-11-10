@@ -1,6 +1,6 @@
-#include "leetcode.h"
+//#include "leetcode.h"
 
-
+/*
 
 int main() {
 	vector<int> v;
@@ -18,3 +18,4 @@ int main() {
 
 	return 0;
 }
+*/
