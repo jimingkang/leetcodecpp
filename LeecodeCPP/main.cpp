@@ -60,7 +60,7 @@ int test(MyAdjlistGraph* g) {
 
 //example 6
 
-int test(MyTree* g) {
+int testMyTree(MyTree* g) {
 
 
 
@@ -90,14 +90,14 @@ int test(MyTree* g) {
 					}
 					else {
 						g->addEdge(selectedNode, nodeIndex); // 创建边
+						g->drawTree(g->root);
 						selectedNode = -1; // 重置选择状态
 					}
 				}
 				g->drawGraph();
 			}
 			else if (e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_SPACE) {
-				g->printGraph();
-				g->DFS(0); // 按下空格键时从节点0开始DFS
+				g->dfsPreorder(g->root);
 			}
 		}
 
@@ -195,10 +195,14 @@ int main(int argc,char ** argv) {
 
 
 	//example 5
-	MyAdjlistGraph g1(renderer);
-	test(&g1);
+	//MyAdjlistGraph g1(renderer);
+	//test(&g1);
 	
 
+	//example 6 test MyTree
+	//MyNode* root = new MyNode(0);
+	MyTree* p = new MyTree(renderer);
+	testMyTree(p);
 
 	// 关闭SDL
 	SDL_DestroyRenderer(renderer);

@@ -18,7 +18,7 @@
 #include <string>
 #include <cstdlib>
 
-const int NODE_RADIUS = 20;
+
 
 using namespace std;
 

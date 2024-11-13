@@ -140,6 +140,7 @@
     <ClCompile Include="MyAdjlistGraph.cpp" />
     <ClCompile Include="MyAdjlistGraph.h" />
     <ClCompile Include="MyAdjmatrixGraph.cpp" />
+    <ClCompile Include="MyTree.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="leetcode.h" />

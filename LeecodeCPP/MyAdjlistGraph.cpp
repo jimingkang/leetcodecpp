@@ -67,15 +67,16 @@ void MyAdjlistGraph::drawGraph() {
 				int dy = NODE_RADIUS - h;
 				if ((dx * dx + dy * dy) <= (NODE_RADIUS * NODE_RADIUS)) {
 					SDL_RenderDrawPoint(renderer, vertex->p->x + dx, vertex->p->y + dy);
-					const char* font_path = "C:/Users/ET/source/repos/leetcodecpp/x64/Debug/FreeSans.ttf";
-					TTF_Font* font = TTF_OpenFont(font_path, 24);
-					SDL_Rect rect;
-					get_text_and_rect(vertex->p->x-5, vertex->p->y - 10, vertex->data, font, &this->texture, &rect);
-					SDL_RenderCopy(renderer, this->texture, NULL, &rect);
-					//SDL_RenderPresent(renderer);
+					
+					SDL_RenderPresent(renderer);
 				}
 			}
 		}
+		const char* font_path = "C:/Users/ET/source/repos/leetcodecpp/x64/Debug/FreeSans.ttf";
+		TTF_Font* font = TTF_OpenFont(font_path, 24);
+		SDL_Rect rect;
+		get_text_and_rect(vertex->p->x - 5, vertex->p->y - 10, vertex->data, font, &this->texture, &rect);
+		SDL_RenderCopy(renderer, this->texture, NULL, &rect);
 	}
 
 	SDL_RenderPresent(renderer);
