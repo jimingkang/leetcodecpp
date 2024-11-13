@@ -28,12 +28,12 @@ MyQueue::MyQueue() : front(nullptr), rear(nullptr) {}
 }
 
 // 查看队首元素
- int MyQueue::peek() const {
+ MyNode* MyQueue::peek()  {
     if (front == nullptr) {
         std::cout << "Queue is empty." << std::endl;
-        return -1;
+        return nullptr;
     }
-    return front->data;
+    return front;
 }
 
 // 检查队列是否为空

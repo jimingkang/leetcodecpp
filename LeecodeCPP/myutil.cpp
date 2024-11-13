@@ -136,12 +136,32 @@ int testMyTree(MyTree* g) {
 				
 			}
 			else if (e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_SPACE) {
-				g->dfsPreorder(g->root);
+				g->levelOrderTraversal(g->root);
+				//g->dfsPreorder(g->root);
 				//g->levelOrderTraversal(g->root);
 					//g->drawTree(g->root);
 			}
 		}
 
+	}
+	return 0;
+
+}
+int testLinkedList(MyLinkedList* list) {
+	// 绘制链表
+	list->drawLinkedList();
+	
+
+
+	// 等待退出
+	bool quit = false;
+	SDL_Event e;
+	while (!quit) {
+		while (SDL_PollEvent(&e) != 0) {
+			if (e.type == SDL_QUIT) {
+				quit = true;
+			}
+		}
 	}
 	return 0;
 

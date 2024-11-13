@@ -48,15 +48,11 @@ public:
 
     void drawGraph();
     void  levelOrderTraversal(MyNode* root);
+    void get_text_and_rect(int x, int y, int nodeNum, TTF_Font* font, SDL_Texture** texture, SDL_Rect* rect );
 
     // DFS前序遍历并动态显示遍历过程
     void dfsPreorder(MyNode* root);
-    /*
-    - x, y: upper left corner.
-    - texture, rect: outputs.
-    */
-    void get_text_and_rect(int x, int y, int nodeNum, TTF_Font* font, SDL_Texture** texture, SDL_Rect* rect
-    );
+  
 
     // 获取鼠标点击位置的节点索引
     int getNodeIndexAtPosition(int x, int y);

@@ -16,7 +16,7 @@ public:
     virtual void poll();
 
     // 查看队首元素
-    virtual int peek() const;
+    virtual MyNode* peek() ;
 
     // 检查队列是否为空
     bool isEmpty() const;

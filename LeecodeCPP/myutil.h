@@ -13,7 +13,7 @@
 int test(MyAdjlistGraph* g);
 
 int testMyTree(MyTree* root);
-
+int testLinkedList(MyLinkedList* list);
 
 
 

@@ -113,6 +113,15 @@ int main(int argc,char ** argv) {
 	MyTree* p = new MyTree(renderer);
 	testMyTree(p);
 
+	//example7 MyList
+	//MyLinkedList list(renderer);
+	//list.addAtHead(3);
+	//list.addAtHead(2);
+	//list.addAtHead(1);
+	//list.addAtHead(4);
+	//list.addAtHead(5);
+	//testLinkedList(&list);
+
 	// 关闭SDL
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);

@@ -17,7 +17,7 @@ extern int DFS_DELAY_MS; // 每次绘制路径之间的延迟时间（毫秒）
 
 using namespace std;
 class MyLinkedList :public MyQueue {
-private :
+public :
 	MyNode * head;
 	MyNode* rear;
 	SDL_Rect rect;
@@ -31,9 +31,9 @@ public:
 		this->renderer = renderer;
 		head = nullptr;
 	};
-	void drawNode(SDL_Renderer* renderer, int x, int y, int value, bool hasNext);
-	void drawLinkedList(SDL_Renderer* renderer, MyNode* head);
-
+	void drawNode( int x, int y, int value, bool hasNext);
+	void drawLinkedList();
+	void get_text_and_rect(int x, int y, int nodeNum, TTF_Font* font, SDL_Texture** texture, SDL_Rect* rect);
 	void addAtHead(int data);
 	void addAtTail(int data);
 	void delAtTail(int index);
@@ -41,13 +41,13 @@ public:
 	MyNode * getHead();
 
 	// 入队
-	virtual void offer(int value);
+	 void offer(MyNode * node);
 
 	// 出队
-	virtual void poll();
+	 void poll();
 
 	// 查看队首元素
-	virtual int peek() const;
+	 MyNode* peek() ;
 
 	// 检查队列是否为空
 	bool isEmpty() const;
