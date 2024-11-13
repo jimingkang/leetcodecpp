@@ -3,6 +3,7 @@
 #include <iostream>
 #include <vector>
 #include <stack>
+#include <queue>
 #include <SDL2/SDL.h>
 #undef main
 #include <SDL2/SDL_ttf.h>
@@ -29,6 +30,7 @@ class MyTree {
 public:
     MyNode* root;
     std::vector<MyNode*> vertices; // 存储所有顶点
+    vector<vector<MyNode*>> adj; // 邻接表
     int V;
     int selectIndex = -1;
 
@@ -40,11 +42,12 @@ public:
 public:
     MyTree( SDL_Renderer* renderer);
     // 绘制节点的圆
-    void drawCircle(int x, int y, int radius);
+    void drawCircle(MyNode* node, int radius);
     // 绘制二叉树节点及其连接线
     void drawTree(MyNode* root);
 
     void drawGraph();
+    void  levelOrderTraversal(MyNode* root);
 
     // DFS前序遍历并动态显示遍历过程
     void dfsPreorder(MyNode* root);

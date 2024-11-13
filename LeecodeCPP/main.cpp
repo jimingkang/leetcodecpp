@@ -3,6 +3,10 @@
 
 #include "myutil.h"
 
+ int NODE_WIDTH = 60;      // 节点宽度
+ int NODE_HEIGHT = 40;     // 节点高度
+ int NODE_SPACING = 80;    // 节点之间的间隔
+
  int SCREEN_WIDTH = 800;
  int SCREEN_HEIGHT = 600;
  int NODE_RADIUS = 20;
@@ -34,6 +38,7 @@ p->dfsPreorder(root, renderer);
 
 int main(int argc,char ** argv) {
 	// example 1
+	/*
 	 MyLinkedList *l = new MyLinkedList();
 	l->addAtHead(1);
 	l->addAtHead(2);
@@ -41,7 +46,7 @@ int main(int argc,char ** argv) {
 
 	l->addAtTail(3);
 	l->print();
-
+	*/
 
 
 	// example 2/
@@ -59,7 +64,7 @@ int main(int argc,char ** argv) {
 	std::cout << maxWater(v) <<" " << std::endl;
 	*/
 		// example 3/
-		/**/
+
 	
 
 	SDL_Rect rect1, rect2;

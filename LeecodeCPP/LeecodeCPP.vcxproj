@@ -141,11 +141,13 @@
     <ClCompile Include="MyAdjlistGraph.h" />
     <ClCompile Include="MyAdjmatrixGraph.cpp" />
     <ClCompile Include="MyLinkedList.cpp" />
+    <ClCompile Include="MyQueue.cpp" />
     <ClCompile Include="MyTree.cpp" />
     <ClCompile Include="myutil.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="leetcode.h" />
+    <ClInclude Include="MyQueue.h" />
     <ClInclude Include="myutil.h" />
     <ClInclude Include="MyAdjmatrixGraph.h" />
     <ClInclude Include="MyLinkedList.h" />

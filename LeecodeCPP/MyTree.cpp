@@ -1,4 +1,5 @@
-﻿#include "MyNode.h"
+﻿
+#include "MyNode.h"
 #include "MyTree.h"
 
 
@@ -10,32 +11,38 @@ MyTree::MyTree( SDL_Renderer* renderer) {
     this->V = 0;
 }
 // 绘制节点的圆
-void MyTree::drawCircle(int x, int y, int radius) {
+void MyTree::drawCircle(MyNode * node, int radius) {
     for (int w = 0; w < radius * 2; w++) {
         for (int h = 0; h < radius * 2; h++) {
             int dx = radius - w;
             int dy = radius - h;
             if ((dx * dx + dy * dy) <= (radius * radius)) {
-                SDL_RenderDrawPoint(renderer, x + dx, y + dy);
+                SDL_RenderDrawPoint(renderer, node->p->x + dx, node->p->y + dy);
             }
         }
     }
 }
 // 绘制图
 void MyTree::drawGraph() {
-    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255); // 黑色用于边
+//   SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255); // 黑色用于background
+ //   SDL_RenderClear(renderer);
+  //  SDL_RenderPresent(renderer);
+
+    SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255); //red+ green色用于边
 
     // 绘制边
-   // for (int i = 0; i < this->V; ++i) {
-    //    for (MyNode* neighbor : this->adj[i]) {
-    //        SDL_RenderDrawLine(renderer, this->vertices[i]->p->x, vertices[i]->p->y, neighbor->p->x, neighbor->p->y);
-   //     }
-  //  }
+    for (int i = 0; i < this->V; ++i) {
+       for (MyNode* neighbor : this->adj[i]) {
+           SDL_RenderDrawLine(renderer, this->vertices[i]->p->x, vertices[i]->p->y, neighbor->p->x, neighbor->p->y);
+       }
+    }
+
+ 
 
     // 绘制节点
     SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255); // 蓝色节点
     for (const auto& vertex : vertices) {
-        drawCircle(vertex->p->x, vertex->p->y, NODE_RADIUS);
+        drawCircle(vertex, NODE_RADIUS);
         const char* font_path = "C:/Users/ET/source/repos/leetcodecpp/x64/Debug/FreeSans.ttf";
         TTF_Font* font = TTF_OpenFont(font_path, 24);
         SDL_Rect rect;
@@ -62,14 +69,36 @@ void MyTree::drawTree(MyNode* root) {
 
     // 绘制当前节点的圆圈
     SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255); // 蓝色表示未访问节点
-    drawCircle(root->p->x, root->p->y, NODE_RADIUS);
-   
+    drawCircle(root, NODE_RADIUS);
+    SDL_RenderPresent(renderer);
     const char* font_path = "C:/Users/ET/source/repos/leetcodecpp/x64/Debug/FreeSans.ttf";
     TTF_Font* font = TTF_OpenFont(font_path, 24);
     SDL_Rect rect;
     get_text_and_rect(root->p->x - 5, root->p->y - 10, root->data, font, &this->texture, &rect);
     SDL_RenderCopy(renderer, this->texture, NULL, &rect);
     SDL_RenderPresent(renderer);
+}
+void  MyTree::levelOrderTraversal(MyNode* root) {
+    if (root == nullptr)
+        return;
+    queue<MyNode*> q;
+    q.push(root);
+    while (!q.empty())
+    {
+        MyNode* tmp = q.front();
+        q.pop();
+        cout << tmp->data << " "; // 打印当前节点的值
+        if (tmp->left != nullptr)
+        {
+            q.push(tmp->left);
+        }
+        if (tmp->right != nullptr)
+        {
+            q.push(tmp->left);
+        }
+      
+    }
+
 }
 
 // DFS前序遍历并动态显示遍历过程
@@ -78,8 +107,13 @@ void MyTree::dfsPreorder(MyNode* root) {
 
     // 将当前节点标记为已访问，显示红色
     SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255); // 红色表示已访问节点
-    drawCircle(root->p->x, root->p->y, NODE_RADIUS);
+    drawCircle(root, NODE_RADIUS);
     SDL_RenderPresent(renderer);
+    const char* font_path = "C:/Users/ET/source/repos/leetcodecpp/x64/Debug/FreeSans.ttf";
+    TTF_Font* font = TTF_OpenFont(font_path, 24);
+    SDL_Rect rect;
+    get_text_and_rect(root->p->x - 5, root->p->y - 10, root->data, font, &this->texture, &rect);
+    SDL_RenderCopy(renderer, this->texture, NULL, &rect);
     std::this_thread::sleep_for(std::chrono::milliseconds(200)); // 延迟显示
 
     // 递归遍历左子树和右子树
@@ -131,10 +165,25 @@ void MyTree::addNode(int x, int y) {
 
 
     vertices.push_back(tmp);
+    adj.push_back({});
     this->V++;
 
 }
 
+MyNode* insert(MyNode* root, int value) {
+    if (root == nullptr) {
+        return new MyNode(value); // 如果当前节点为空，则创建新节点
+    }
+
+    if (value < root->data) {
+        root->left = insert(root->left, value); // 递归插入到左子树
+    }
+    else if (value > root->data) {
+        root->right = insert(root->right, value); // 递归插入到右子树
+    }
+
+    return root; // 返回根节点
+}
 // 添加边
 MyNode* MyTree::addEdge(int v, int w) {
     MyNode* tmp = vertices[v];
@@ -151,11 +200,23 @@ MyNode* MyTree::addEdge(int v, int w) {
       
 
     }
-    if((vertices[w]->data )< (pretmp->data))
+    if ((vertices[w]->data) < (pretmp->data))
+    {
         pretmp->left = vertices[w];
+        vertices[w]->p->x = pretmp->p->x - 50;
+        vertices[w]->p->y = pretmp->p->y +50;
+        adj[pretmp->left->idx].push_back(this->vertices[w]); // 添加 v -> w 的边
+        adj[w].push_back(this->vertices[pretmp->left->idx]); // 如果是无向图，添加 w -> v 的边
+    }
     else 
+    {
         pretmp->right = vertices[w];
+        vertices[w]->p->x = pretmp->p->x + 50;
+        vertices[w]->p->y = pretmp->p->y + 50;
+        adj[pretmp->right->idx].push_back(this->vertices[w]); // 添加 v -> w 的边
+        adj[w].push_back(this->vertices[pretmp->right->idx]); // 如果是无向图，添加 w -> v 的边
+    }
+  
 
-    //adj[v].push_back(this->vertices[w]); // 添加 v -> w 的边
-    //adj[w].push_back(this->vertices[v]); // 如果是无向图，添加 w -> v 的边
+   
 }
