@@ -18,7 +18,10 @@
 #include <string>
 #include <cstdlib>
 
-
+extern int SCREEN_WIDTH;
+extern int SCREEN_HEIGHT;
+extern int NODE_RADIUS;
+extern int DFS_DELAY_MS; // 每次绘制路径之间的延迟时间（毫秒）
 
 using namespace std;
 

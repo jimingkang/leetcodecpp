@@ -1,5 +1,5 @@
 ﻿#include "MyAdjlistGraph.h"
-#include "main.h"
+
 // 构造函数
 MyAdjlistGraph::MyAdjlistGraph(SDL_Renderer*  renderer) {
 

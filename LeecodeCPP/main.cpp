@@ -1,110 +1,14 @@
 ﻿#include <memory>
-#include "MyAdjlistGraph.h"
-#include "leetcode.h"
-#include "MyLinkedList.h"
-#include "MyAdjmatrixGraph.h"
-
-#include "MyTree.h"
 
 
-#include "main.h"
+#include "myutil.h"
 
-
+ int SCREEN_WIDTH = 800;
+ int SCREEN_HEIGHT = 600;
+ int NODE_RADIUS = 20;
+ int DFS_DELAY_MS = 100; // 每次绘制路径之间的延迟时间（毫秒）
 // example 5//
 
-int test(MyAdjlistGraph* g) {
-	
-
-
-
-
-
-	// 保持窗口打开
-	bool quit = false;
-	SDL_Event e;
-	int selectedNode = -1;
-	while (!quit) {
-		while (SDL_PollEvent(&e) != 0) {
-			if (e.type == SDL_QUIT) {
-				quit = true;
-			}
-			if (e.type == SDL_MOUSEBUTTONDOWN) {
-				int x = e.button.x;
-				int y = e.button.y;
-
-				int nodeIndex = g->getNodeIndexAtPosition(x, y);
-				if (nodeIndex == -1) {
-					g->addNode(x, y); // 在点击位置添加新节点
-				}
-				else {
-					if (selectedNode == -1) {
-						selectedNode = nodeIndex; // 选择第一个节点
-					}
-					else {
-						g->addEdge(selectedNode, nodeIndex); // 创建边
-						selectedNode = -1; // 重置选择状态
-					}
-				}
-				g->drawGraph();
-			}
-			else if (e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_SPACE) {
-				g->printGraph();
-				g->DFS(0); // 按下空格键时从节点0开始DFS
-			}
-		}
-
-	}
-	return 0;
-
-}
-
-//example 6
-
-int testMyTree(MyTree* g) {
-
-
-
-
-
-
-	// 保持窗口打开
-	bool quit = false;
-	SDL_Event e;
-	int selectedNode = -1;
-	while (!quit) {
-		while (SDL_PollEvent(&e) != 0) {
-			if (e.type == SDL_QUIT) {
-				quit = true;
-			}
-			if (e.type == SDL_MOUSEBUTTONDOWN) {
-				int x = e.button.x;
-				int y = e.button.y;
-
-				int nodeIndex = g->getNodeIndexAtPosition(x, y);
-				if (nodeIndex == -1) {
-					g->addNode(x, y); // 在点击位置添加新节点
-				}
-				else {
-					if (selectedNode == -1) {
-						selectedNode = nodeIndex; // 选择第一个节点
-					}
-					else {
-						g->addEdge(selectedNode, nodeIndex); // 创建边
-						g->drawTree(g->root);
-						selectedNode = -1; // 重置选择状态
-					}
-				}
-				g->drawGraph();
-			}
-			else if (e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_SPACE) {
-				g->dfsPreorder(g->root);
-			}
-		}
-
-	}
-	return 0;
-
-}
 
 /*
 // 构建二叉树并设置节点位置
@@ -130,7 +34,7 @@ p->dfsPreorder(root, renderer);
 
 int main(int argc,char ** argv) {
 	// example 1
-	/* MyLinkedList *l = new MyLinkedList();
+	 MyLinkedList *l = new MyLinkedList();
 	l->addAtHead(1);
 	l->addAtHead(2);
 	l->print();
@@ -138,7 +42,7 @@ int main(int argc,char ** argv) {
 	l->addAtTail(3);
 	l->print();
 
-	*/
+
 
 	// example 2/
 	/*

@@ -33,6 +33,12 @@
     <ClCompile Include="MyTree.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="myutil.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MyLinkedList.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MyLinkedList.h">
@@ -50,7 +56,7 @@
     <ClInclude Include="MyTree.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="main.h">
+    <ClInclude Include="myutil.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

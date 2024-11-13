@@ -1,7 +1,7 @@
 ﻿#include "MyNode.h"
 #include "MyTree.h"
 
-#include "main.h"
+
 
 
 MyTree::MyTree( SDL_Renderer* renderer) {
