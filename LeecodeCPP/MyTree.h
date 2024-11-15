@@ -52,6 +52,8 @@ public:
     void  invertTree(MyNode* root);
     MyNode* lowestCommonAncester(MyNode* root, int p, int q);
     void updateNodeXY(MyNode* root,int space);
+    bool hasPathSum(int targetSum);
+    bool pathSum(MyNode* root, int targetSum, int sum,vector<MyNode*>* v);
     void get_text_and_rect(int x, int y, int nodeNum, TTF_Font* font, SDL_Texture** texture, SDL_Rect* rect );
 
     // DFS前序遍历并动态显示遍历过程

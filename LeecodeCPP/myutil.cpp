@@ -144,21 +144,21 @@ int testMyTree(MyTree* g) {
 				
 
 				//example 9
-				g->invertTree(g->root);
+				//g->invertTree(g->root);
 				//g->updateNodeXY(g->root,200);
-				g->drawTree(g->root);
+				//g->drawTree(g->root);
 
 				//example 10
 				// MyNode * common=g->lowestCommonAncester(g->root, 41, 0);
 				//printf("common :%d\n", common->data);
 		
-				
-				//g->levelOrderTraversal(g->root);
+				//example 11
+				g->hasPathSum(75);
 
 				//g->root->p->x = g->root->p->x + 100;
  				//g->dfsPreorder(g->root);
 				//g->levelOrderTraversal(g->root);
-					//g->drawTree(g->root);
+				//g->drawTree(g->root);
 			}
 		}
 
