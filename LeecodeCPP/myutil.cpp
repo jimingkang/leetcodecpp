@@ -109,7 +109,6 @@ int testMyTree(MyTree* g) {
 						}
 						else {
 							g->addEdge(selectedNode, nodeIndex); // 创建边
-							g->drawTree(g->root);
 							selectedNode = -1; // 重置选择状态
 						}
 					}
@@ -136,8 +135,28 @@ int testMyTree(MyTree* g) {
 				
 			}
 			else if (e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_SPACE) {
-				g->levelOrderTraversal(g->root);
-				//g->dfsPreorder(g->root);
+
+				//example 7
+				//g->levelOrderTraversal(g->root);
+				
+				//example 8
+				//printf("max height:%d\n", g->maxHeight(g->root));
+				
+
+				//example 9
+				g->invertTree(g->root);
+				//g->updateNodeXY(g->root,200);
+				g->drawTree(g->root);
+
+				//example 10
+				// MyNode * common=g->lowestCommonAncester(g->root, 41, 0);
+				//printf("common :%d\n", common->data);
+		
+				
+				//g->levelOrderTraversal(g->root);
+
+				//g->root->p->x = g->root->p->x + 100;
+ 				//g->dfsPreorder(g->root);
 				//g->levelOrderTraversal(g->root);
 					//g->drawTree(g->root);
 			}

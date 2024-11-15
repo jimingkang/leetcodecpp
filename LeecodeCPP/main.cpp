@@ -11,6 +11,9 @@
  int SCREEN_HEIGHT = 600;
  int NODE_RADIUS = 20;
  int DFS_DELAY_MS = 100; // 每次绘制路径之间的延迟时间（毫秒）
+  int GRID_ROWS = 10;  // 网格行数
+  int GRID_COLS = 10;  // 网格列数
+  int CELL_SIZE = 40;  // 每个单元格的大小（像素）;;
 // example 5//
 
 
@@ -36,6 +39,8 @@ p->dfsPreorder(root, renderer);
 */
 /**/
 
+  SDL_Window* window = nullptr;
+  SDL_Renderer* renderer = nullptr;
 int main(int argc,char ** argv) {
 	// example 1
 	/*
@@ -86,14 +91,14 @@ int main(int argc,char ** argv) {
 		fprintf(stderr, "error: font not found\n");
 		exit(EXIT_FAILURE);
 	}
-	SDL_Window* window = SDL_CreateWindow("DFS Path Visualization", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
+	 window = SDL_CreateWindow("DFS Path Visualization", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
 	if (window == nullptr) {
 		std::cerr << "Window could not be created! SDL_Error: " << SDL_GetError() << std::endl;
 		SDL_Quit();
 		return 1;
 	}
 
-	SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
 	if (renderer == nullptr) {
 		std::cerr << "Renderer could not be created! SDL_Error: " << SDL_GetError() << std::endl;
@@ -121,6 +126,11 @@ int main(int argc,char ** argv) {
 	//list.addAtHead(4);
 	//list.addAtHead(5);
 	//testLinkedList(&list);
+
+	//leetcode island issue
+	//drawGrid();
+	//int islandCount = countIslands();
+	//std::cout << "Number of islands: " << islandCount << std::endl;
 
 	// 关闭SDL
 	SDL_DestroyRenderer(renderer);

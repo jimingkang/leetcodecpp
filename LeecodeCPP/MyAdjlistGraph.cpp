@@ -225,7 +225,3 @@ void MyAdjlistGraph::mouseUp(SDL_MouseButtonEvent& b) {
 
 
 
-// example 5//
-
-
-

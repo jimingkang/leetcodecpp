@@ -57,6 +57,7 @@ void MyTree::drawGraph() {
 // 绘制二叉树节点及其连接线
 void MyTree::drawTree(MyNode* root) {
     if (root == nullptr) return;
+   
 
     // 绘制左右子节点的连接线
     if (root->left) {
@@ -82,23 +83,23 @@ void MyTree::drawTree(MyNode* root) {
 void  MyTree::levelOrderTraversal(MyNode* root) {
     if (root == nullptr)
         return;
-   // queue<MyNode*> q; 
-  //  queue<MyNode*> *qq = ;
+    // queue<MyNode*> q; 
+   //  queue<MyNode*> *qq = ;
     MyLinkedList* q = new MyLinkedList(renderer);
 
-   
+
     q->offer(root);
     q->drawLinkedList();
     while (!q->isEmpty())
     {
-       
-        
-         MyNode* tmp = q->peek();
+
+
+        MyNode* tmp = q->peek();
         // q->drawLinkedList();
-         SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255); //red色用于Node
-         drawCircle(tmp, NODE_RADIUS);
-         SDL_RenderPresent(renderer);
-      
+        SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255); //red色用于Node
+        drawCircle(tmp, NODE_RADIUS);
+        SDL_RenderPresent(renderer);
+
         cout << tmp->data << " "; // 打印当前节点的值
         if (tmp->left != nullptr)
         {
@@ -108,14 +109,94 @@ void  MyTree::levelOrderTraversal(MyNode* root) {
         {
             q->offer(tmp->right);
         }
-         q->poll();
-         q->drawLinkedList();
+        q->poll();
+        q->drawLinkedList();
         // SDL_RenderPresent(renderer);
 
-         _sleep(500);
-      
-    }
+        _sleep(500);
 
+    }
+}
+MyNode* MyTree::lowestCommonAncester(MyNode * root, int p, int q) {
+    if (root==nullptr||root->data== p || root->data == q)
+        return root;
+    MyNode* l= lowestCommonAncester(root->left,p,  q);
+    MyNode* r = lowestCommonAncester(root->right, p, q);
+    if (l != nullptr && r != nullptr)
+        return root;
+    return l==nullptr ?r : l;
+}
+
+
+
+
+void  MyTree::invertTree(MyNode* root) {
+    if (root == nullptr)
+        return;
+    MyNode* tmp = root->left;
+    root->left = root->right;
+    root->right = tmp;
+    if (root->left != nullptr)
+        root->left->p->x = root->p->x - 50;
+    if (root->right != nullptr)
+        root->right->p->x = root->p->x + 50;
+
+    invertTree(root->left);
+    invertTree(root->right);
+    
+ 
+  
+   
+}
+int  MyTree::maxHeight(MyNode* root) {
+    int lh = 0;
+    int rh = 0;
+
+    if (root == nullptr)
+        return 0;
+
+     //   SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255); //red色用于Node
+     //   drawCircle(tmp, NODE_RADIUS);
+     //   SDL_RenderPresent(renderer);
+
+      
+        if (root->left != nullptr)
+        {
+            lh=maxHeight(root->left)+1;
+            const char* font_path = "C:/Users/ET/source/repos/leetcodecpp/x64/Debug/FreeSans.ttf";
+            TTF_Font* font = TTF_OpenFont(font_path, 24);
+        //  SDL_Rect rect;
+        //  get_text_and_rect(root->left->p->x - 20, root->left->p->y - 20, lh, font, &this->texture, &rect);
+        //    SDL_RenderCopy(renderer, this->texture, NULL, &rect);
+        //  SDL_RenderPresent(renderer);
+        }
+        else if (root->right != nullptr)
+        {
+            rh = maxHeight(root->right)+1;
+            const char* font_path = "C:/Users/ET/source/repos/leetcodecpp/x64/Debug/FreeSans.ttf";
+            TTF_Font* font = TTF_OpenFont(font_path, 24);
+            SDL_Rect rect;
+            get_text_and_rect(root->right->p->x + 50, root->right->p->y - 20, rh, font, &this->texture, &rect);
+            SDL_RenderCopy(renderer, this->texture, NULL, &rect);
+            SDL_RenderPresent(renderer);
+        }
+ 
+ 
+
+        _sleep(500);
+        return max(lh, rh);
+
+   
+
+}
+   
+void MyTree::updateNodeXY(MyNode* root,int space) {
+    if (root == nullptr) return;
+
+    root->p->x = root->p->x + space;
+    // 递归遍历左子树和右子树
+    updateNodeXY(root->left, space);
+    updateNodeXY(root->right, space);
 }
 
 // DFS前序遍历并动态显示遍历过程
@@ -176,8 +257,8 @@ int MyTree::getNodeIndexAtPosition(int x, int y) {
 }
 void MyTree::addNode(int x, int y) {
     MyNode* tmp = new MyNode(rand()%100,V, x, y);
-    if (root == nullptr)
-        root = tmp;
+   // if (root == nullptr)
+   //     root = tmp;
 
 
 
@@ -204,6 +285,8 @@ MyNode* insert(MyNode* root, int value) {
 // 添加边
 MyNode* MyTree::addEdge(int v, int w) {
     MyNode* tmp = vertices[v];
+    if (root == nullptr)
+        root = tmp;
     MyNode* pretmp = nullptr;
     while (tmp != nullptr) {
         pretmp = tmp;

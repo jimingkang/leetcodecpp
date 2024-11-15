@@ -34,7 +34,7 @@ public:
 		this->p = new Point();
 	}
 	MyNode() {
-	
+		p = new Point();
 	}
 	~MyNode() {
 		delete p;

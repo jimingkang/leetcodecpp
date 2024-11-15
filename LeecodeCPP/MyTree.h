@@ -48,6 +48,10 @@ public:
 
     void drawGraph();
     void  levelOrderTraversal(MyNode* root);
+    int  maxHeight(MyNode* root);
+    void  invertTree(MyNode* root);
+    MyNode* lowestCommonAncester(MyNode* root, int p, int q);
+    void updateNodeXY(MyNode* root,int space);
     void get_text_and_rect(int x, int y, int nodeNum, TTF_Font* font, SDL_Texture** texture, SDL_Rect* rect );
 
     // DFS前序遍历并动态显示遍历过程
