@@ -128,30 +128,32 @@ int removeElement(vector<int>& nums, int val) {
 
 int getMinimumDifference(MyNode* root) {
      int min = 10000;
-
     minimumDifference(root,min);
     return min;
 }
 
 
 
-void minimumDifference(MyNode* root, int & min) {
+int minimumDifference(MyNode* root, int & min) {
     static int pre=-1;
     
     if (root == nullptr)
-        return ;
+        return 0;
+    else if (root != nullptr && root->left == nullptr && root->right == nullptr)
+        return  root->data;
   
     
-       minimumDifference(root->left,min);
-       if(pre!=-1)
-       min = std::min(min, abs(root->data - pre));
- 
-    
-       pre = root->data;
+     int l=  minimumDifference(root->left,min);
+      
 
 
-       minimumDifference(root->right,min);
-    
+    int r=   minimumDifference(root->right,min);
+
+       min = std::min(min, abs(root->data - l));
+       min = std::min(min, abs(root->data - r));
+
+
+       return (root->data - l) > (root->data - r) ? r : l;
 
 
 

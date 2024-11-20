@@ -145,15 +145,77 @@ int testMyTree(MyTree* g) {
 
 				//example 9
 				//g->invertTree(g->root);
-				//g->updateNodeXY(g->root,200);
 				//g->drawTree(g->root);
+				//_sleep(1000);
 
 				//example 10
 				// MyNode * common=g->lowestCommonAncester(g->root, 41, 0);
 				//printf("common :%d\n", common->data);
 		
 				//example 11
-				g->hasPathSum(75);
+
+				//g->hasPathSum(75);
+				
+
+				//example 12
+
+				//g->allPath();
+
+
+				//example 13 leetcode129 Sum Root to Leaf Numbers
+				//g->sumAllPath();
+
+				//example 14 leetcode124 Binary Tree Maximum Path Sum
+				/**/g->root = new MyNode(1);
+				//g->root->left = new MyNode(2);
+				g->root->right = new MyNode(5);
+				//g->root->left->left = new MyNode(3);
+				//g->root->left->right = new MyNode(4);
+				
+				/*
+				g->root = new MyNode(1);
+				g->root->left = new MyNode(2);
+				g->root->right = new MyNode(3);
+				*/
+				//g->root = new MyNode(-2);
+				//g->root->left = new MyNode(-1);
+				//g->maxPathSum();
+
+
+				///example 15 leetcode 114
+				//g->toLinkedLIst(g->root);
+				//g->drawGraph();
+
+				///example 16 leetcode 114
+    			//	int cnt=g->countNodes(g->root);
+				//printf("%d\n", cnt);
+
+				///example 17 leetcode 236 Lowest Common Ancestor of a Binary Tree
+				//MyNode* p=g->root->right;
+				//MyNode* q = g->root->left->right;
+				g->lowestCommonAncester(g->root,4,5);
+
+				static vector<int>v;
+
+				queue<MyNode*> q;
+				q.push(g->root);
+				while (!q.empty())
+				{
+					MyNode* tmp = q.front();
+					if (tmp != nullptr)
+					{
+						v.push_back(tmp->data);
+						q.pop();
+						if (tmp->right != nullptr)
+						{
+							q.push(tmp->right);
+
+						}
+					}
+				}
+				
+
+			
 
 				//g->root->p->x = g->root->p->x + 100;
  				//g->dfsPreorder(g->root);

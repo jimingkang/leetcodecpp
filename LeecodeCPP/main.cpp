@@ -1,5 +1,6 @@
-﻿#include <memory>
-
+﻿
+#include <memory>
+#include "leetcode.h"
 
 #include "myutil.h"
 
@@ -17,60 +18,42 @@
 // example 5//
 
 
-/*
-// 构建二叉树并设置节点位置
-MyNode* root = new MyNode(1, SCREEN_WIDTH / 2, 50);
-root->left = new MyNode(2, SCREEN_WIDTH / 4, 150);
-root->right = new MyNode(3, 3 * SCREEN_WIDTH / 4, 150);
-root->left->left = new MyNode(4, SCREEN_WIDTH / 8, 250);
-root->left->right = new MyNode(5, SCREEN_WIDTH / 4 + SCREEN_WIDTH / 8, 250);
-root->right->left = new MyNode(6, 3 * SCREEN_WIDTH / 4 - SCREEN_WIDTH / 8, 250);
-root->right->right = new MyNode(7, 7 * SCREEN_WIDTH / 8, 250);
-
-// 清空屏幕并绘制初始二叉树
-SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255); // 白色背景
-SDL_RenderClear(renderer);
-MyTree* p = new MyTree(root);
-p->drawTree(renderer, root);
-
-// 执行DFS遍历并动态显示过程
-p->dfsPreorder(root, renderer);
-
-*/
-/**/
 
   SDL_Window* window = nullptr;
   SDL_Renderer* renderer = nullptr;
+  
 int main(int argc,char ** argv) {
-	// example 1
-	/*
-	 MyLinkedList *l = new MyLinkedList();
-	l->addAtHead(1);
-	l->addAtHead(2);
-	l->print();
-
-	l->addAtTail(3);
-	l->print();
-	*/
-
-
-	// example 2/
-	/*
-	vector<int> v;
-	v.push_back(10);
-	v.push_back(5);
-	v.push_back(4);
-	v.push_back(0);
-	v.push_back(8);
-	for (vector<int>::iterator it = v.begin(); it != v.end(); ++it) {
-		cout << *it;
-	}
-
-	std::cout << maxWater(v) <<" " << std::endl;
-	*/
-		// example 3/
-
+	// test  MyLinkedList
+	// MyLinkedList *l = new MyLinkedList();
+	//l->addAtHead(1);
+	//l->addAtHead(2);
+	//l->print();
+	//l->addAtTail(3);
+	//l->print();
 	
+
+
+	// test vector/
+	//vector<int> v;
+	//v.push_back(10);
+	//v.push_back(5);
+	//v.push_back(4);
+	//v.push_back(0);
+	//v.push_back(8);
+	//for (vector<int>::iterator it = v.begin(); it != v.end(); ++it) {
+	//	cout << *it;
+	//}
+
+	//std::cout << maxWater(v) <<" " << std::endl;
+		//test MyList
+	//MyLinkedList list(renderer);
+	//list.addAtHead(3);
+	//list.addAtHead(2);
+	//list.addAtHead(1);
+	//list.addAtHead(4);
+	//list.addAtHead(5);
+	//testLinkedList(&list);
+
 
 	SDL_Rect rect1, rect2;
 	SDL_Texture* texture1, * texture2;
@@ -108,29 +91,53 @@ int main(int argc,char ** argv) {
 	}
 
 
-	//example 5
+	//example MyAdjlistGraph
 	//MyAdjlistGraph g1(renderer);
 	//test(&g1);
 	
 
-	//example 6 test MyTree
+	// test MyTree
 	//MyNode* root = new MyNode(0);
-	MyTree* p = new MyTree(renderer);
-	testMyTree(p);
+	//MyTree* p = new MyTree(renderer);
+	//testMyTree(p);
 
-	//example7 MyList
-	//MyLinkedList list(renderer);
-	//list.addAtHead(3);
-	//list.addAtHead(2);
-	//list.addAtHead(1);
-	//list.addAtHead(4);
-	//list.addAtHead(5);
-	//testLinkedList(&list);
 
-	//leetcode island issue
+
+	//test leetcode island issue
 	//drawGrid();
 	//int islandCount = countIslands();
 	//std::cout << "Number of islands: " << islandCount << std::endl;
+
+	vector<int> nums;
+	//nums.push_back(3);
+	//nums.push_back(2);
+	//nums.push_back(2);
+	//nums.push_back(3);
+	//nums.push_back(0);
+	//nums.push_back(1);
+	//nums.push_back(2);
+	//nums.push_back(2);
+	//nums.push_back(2);
+	//nums.push_back(3);
+	//nums.push_back(0);
+	//nums.push_back(4);
+	//nums.push_back(2);
+
+	//removeElement(nums, 2);
+
+	MyNode* root = new MyNode(1);
+	root->right = new MyNode(5);
+	root->right->left = new MyNode(3);
+	//root->right->right = new MyNode(3);
+
+
+	//MyNode* root = new MyNode(236);
+	//root->left = new MyNode(104);
+	//root->right = new MyNode(701);
+	//root->left->right = new MyNode(227);
+	//root->right->right = new MyNode(911);
+ 	 int diff=getMinimumDifference(root);
+	 printf("%d\n", diff);
 
 	// 关闭SDL
 	SDL_DestroyRenderer(renderer);

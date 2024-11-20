@@ -41,29 +41,42 @@ public:
     SDL_Renderer* renderer;
 public:
     MyTree( SDL_Renderer* renderer);
+
+    // DFS前序遍历并动态显示遍历过程
+    void dfsPreorder(MyNode* root);
+
+    // 获取鼠标点击位置的节点索引
+    int getNodeIndexAtPosition(int x, int y);
+    void addNode(int x, int y);
+
+    // 添加边
+    MyNode* addEdge(int v, int w);
+    MyNode* addEdgeForBinSearchTree(int v, int w);
+
     // 绘制节点的圆
     void drawCircle(MyNode* node, int radius);
     // 绘制二叉树节点及其连接线
     void drawTree(MyNode* root);
-
     void drawGraph();
+    void get_text_and_rect(int x, int y, int nodeNum, TTF_Font* font, SDL_Texture** texture, SDL_Rect* rect);
+    //leetcode 
+
     void  levelOrderTraversal(MyNode* root);
     int  maxHeight(MyNode* root);
     void  invertTree(MyNode* root);
     MyNode* lowestCommonAncester(MyNode* root, int p, int q);
     void updateNodeXY(MyNode* root,int space);
+    bool allPath();
+    bool sumAllPath();
+    bool showAllPath(MyNode* root,vector<vector<MyNode*>>* v, vector < MyNode*> *path);
+    bool maxPathSum();
+    int maxPathSum(MyNode* root, vector<vector<MyNode*>>* v, vector < MyNode*>* path);
     bool hasPathSum(int targetSum);
     bool pathSum(MyNode* root, int targetSum, int sum,vector<MyNode*>* v);
-    void get_text_and_rect(int x, int y, int nodeNum, TTF_Font* font, SDL_Texture** texture, SDL_Rect* rect );
+    void toLinkedLIst(MyNode* root);
 
-    // DFS前序遍历并动态显示遍历过程
-    void dfsPreorder(MyNode* root);
-  
-
-    // 获取鼠标点击位置的节点索引
-    int getNodeIndexAtPosition(int x, int y);
-    void addNode(int x, int y);
+    int countNodes(MyNode* root);
+    MyNode* lowestCommonAncestor(MyNode* root, MyNode* p, MyNode* q);
  
-    // 添加边
-    MyNode* addEdge(int v, int w);
+
 };

@@ -144,6 +144,7 @@
     <ClCompile Include="MyQueue.cpp" />
     <ClCompile Include="MyTree.cpp" />
     <ClCompile Include="myutil.cpp" />
+    <ClCompile Include="supermario.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="leetcode.h" />

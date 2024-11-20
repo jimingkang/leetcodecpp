@@ -26,4 +26,4 @@ int countIslands();
 int removeElement(vector<int>& nums, int val);
 
 int getMinimumDifference(MyNode* root);
-void minimumDifference(MyNode* root, int& min);
+int minimumDifference(MyNode* root, int& min);

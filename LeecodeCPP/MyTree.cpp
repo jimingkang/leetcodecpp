@@ -157,7 +157,7 @@ int MyTree::getNodeIndexAtPosition(int x, int y) {
     return -1; // 未找到节点
 }
 void MyTree::addNode(int x, int y) {
-    MyNode* tmp = new MyNode(rand()%100,V, x, y);
+    MyNode* tmp = new MyNode(rand()%10,V, x, y);
    // if (root == nullptr)
    //     root = tmp;
 
@@ -184,10 +184,40 @@ MyNode* insert(MyNode* root, int value) {
     return root; // 返回根节点
 }
 // 添加边
-MyNode* MyTree::addEdge(int v, int w) {
+MyNode* MyTree::addEdgeForBinSearchTree(int v, int w) {
     MyNode* tmp = vertices[v];
     if (root == nullptr)
         root = tmp;
+    MyNode* pretmp = nullptr;
+    pretmp = tmp;
+   
+    if ((vertices[w]->data) < (pretmp->data))
+    {
+        pretmp->left = vertices[w];
+        vertices[w]->p->x = pretmp->p->x - 50;
+        vertices[w]->p->y = pretmp->p->y + 50;
+        adj[pretmp->left->idx].push_back(this->vertices[w]); // 添加 v -> w 的边
+        adj[w].push_back(this->vertices[pretmp->left->idx]); // 如果是无向图，添加 w -> v 的边
+    }
+    else
+    {
+        pretmp->right = vertices[w];
+        vertices[w]->p->x = pretmp->p->x + 50;
+        vertices[w]->p->y = pretmp->p->y + 50;
+        adj[pretmp->right->idx].push_back(this->vertices[w]); // 添加 v -> w 的边
+        adj[w].push_back(this->vertices[pretmp->right->idx]); // 如果是无向图，添加 w -> v 的边
+    }
+    return tmp;
+
+}
+
+MyNode* MyTree::addEdge(int v, int w) {
+    MyNode* tmp = vertices[v];
+    if (root == nullptr)
+    {
+        root = tmp;
+      //  root->data = -1;
+    }
     MyNode* pretmp = nullptr;
     while (tmp != nullptr) {
         pretmp = tmp;
@@ -217,6 +247,8 @@ MyNode* MyTree::addEdge(int v, int w) {
         adj[pretmp->right->idx].push_back(this->vertices[w]); // 添加 v -> w 的边
         adj[w].push_back(this->vertices[pretmp->right->idx]); // 如果是无向图，添加 w -> v 的边
     }
+
+    return tmp;
 
 }
   
@@ -325,13 +357,218 @@ int  MyTree::maxHeight(MyNode* root) {
 
 }
 
+bool MyTree::allPath() {
+    vector<vector<MyNode*>> v;
+    vector<MyNode*> path;
 
-static int sum;
+
+    SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255); //red+ 色用于node
+     bool flag = showAllPath( this->root,&v,&path);
+    
+    for (vector<MyNode*> i : v)
+    for (MyNode* j : i)
+    {
+        drawCircle(j, NODE_RADIUS);
+        _sleep(500);
+        SDL_RenderPresent(renderer);
+    }
+
+    return 0;
+
+}
+
+//leetcode 124. Binary Tree Maximum Path Sum
+bool MyTree::maxPathSum() {
+    vector<vector<MyNode*>> v;
+    vector<MyNode*> path;
+    int sum = 0;
+    SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255); //red+ 色用于node
+    int final = maxPathSum(this->root, &v, &path);
+      printf("%d\n", final);
+    for (MyNode* j : path)
+    {
+        drawCircle(j, NODE_RADIUS);
+        _sleep(500);
+        SDL_RenderPresent(renderer);
+    }
+
+    SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255); //red+ 色用于node
+   
+
+    return 0;
+
+}
+//leetcode129. Sum Root to Leaf Numbers
+bool MyTree::sumAllPath() {
+    vector<vector<MyNode*>> v;
+    vector<MyNode*> path;
+    int sum = 0;
+    bool flag = showAllPath(this->root, &v, &path);
+    SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255); //red+ 色用于node
+    int total=0;
+    for (vector<MyNode*> i : v)
+    {
+        
+        sum = 0;
+        for (MyNode* j : i)
+        {
+           
+            sum = sum * 10 + j->data;
+            printf("sum=%d\n",sum);
+
+            drawCircle(j, NODE_RADIUS);
+            _sleep(500);
+            SDL_RenderPresent(renderer);
+        }
+        total += sum;
+        printf("total=%d\n", total);
+    }
+
+    return flag;
+
+}
+//leetcode124. Binary Tree Maximum Path Sum
+
+int MyTree::maxPathSum(MyNode* root, vector<vector<MyNode*>>* v, vector < MyNode*>* path) {
+     int tmpmax=0;
+    if (root == nullptr)
+    {
+       
+      
+        return 0;
+    }
+    //path->push_back(root);
+    int leftValue = 0;
+    if (root->left != nullptr)
+    {
+         leftValue=maxPathSum(root->left, v, path);
+      
+    }
+
+  
+    int rightValue=0;
+    if (root->right != nullptr)
+    {
+         rightValue = maxPathSum(root->right, v, path);
+       
+   
+    }
+   
+       
+    if (root->data >= 0)
+    {
+        tmpmax += root->data;
+        path->push_back(root);
+        if (leftValue >0)
+        {
+            tmpmax += leftValue;
+
+            path->push_back(root->left);
+        }
+        if((rightValue > 0))
+        {
+            tmpmax += rightValue;
+
+            path->push_back(root->left);
+        }
+        
+    }
+    else  
+    {
+               
+        if (leftValue < rightValue )
+        {
+           
+            tmpmax += rightValue;
+
+            path->push_back(root->right);
+        }
+        else
+        {
+            tmpmax += leftValue;
+
+            path->push_back(root->left);
+        }
+    
+    }
+
+   
+   
+    return  tmpmax;
+  
+    
+   
+
+}
+
+//leecode Count Complete Tree Nodes
+int MyTree::countNodes(MyNode* root) {
+    static int cnt = 0;
+    if (root == nullptr)
+        return 0;
+    int left = countNodes(root->left);
+
+    int right = countNodes(root->right);
+
+    //cnt++;
+    return left + right + 1;
+
+}
+void MyTree::toLinkedLIst(MyNode* root) {
+    if (root == nullptr)
+        return;
+    toLinkedLIst(root->left);
+    
+    toLinkedLIst(root->right);
+    if (root->left != nullptr)
+    {
+        MyNode* tmp= root->left;
+        while (tmp->right != nullptr)
+        {
+            tmp = tmp->right;
+        }
+       tmp->right = root->right;
+        root->right = root->left;
+        root->left = nullptr;
+    }
+
+
+
+}
+
+
+bool MyTree::showAllPath(MyNode* root,vector<vector<MyNode*>> *v, vector < MyNode*> *path) {
+    
+    if (root!=nullptr &&root->left== nullptr && root->right == nullptr)
+    {
+        path->push_back(root);
+        vector < MyNode*>* tmppath = new vector< MyNode*>(*path);
+        v->push_back(*tmppath);
+        return false;
+    }
+    path->push_back(root);
+    if (root->left != nullptr)
+    {
+        showAllPath(root->left, v, path);
+        path->pop_back();
+    }
+    if (root->right != nullptr)
+     showAllPath(root->right,v,path);
+
+}
+
+
 bool MyTree::hasPathSum(int targetSum) {
     vector<MyNode*> v;
+     int sum=0;
     bool flag= pathSum(this->root, targetSum, sum,&v);
+    SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255); //red+ 色用于node
     for (MyNode* i : v)
-        std::cout << i->data << ' ';
+    {
+        drawCircle(i, NODE_RADIUS);
+        SDL_RenderPresent(renderer);
+    }
+ 
     return flag;
 
 }
@@ -354,13 +591,28 @@ bool  MyTree::pathSum(MyNode * root,int targetSum,int sum,vector<MyNode*>* v) {
         return tmp;
     else
     { 
-       
+       // v->pop_back();
         tmp = pathSum(root->right, targetSum, sum, v);
         if (tmp)
             return tmp;
         else
+        {
             v->pop_back();
+            return false;
+        }
+        return false;
+            
     }
   
    
+}
+
+MyNode* MyTree::lowestCommonAncestor(MyNode* root, MyNode* p, MyNode* q) {
+    if (root == nullptr || root->data == p->data || root->data == q->data)
+        return root;
+    MyNode* left = lowestCommonAncestor(root->left, p, q);
+    MyNode* right = lowestCommonAncestor(root->right, p, q);
+    if (left != nullptr && right != nullptr)
+        return root;
+    return left == nullptr ? right : left;
 }
