@@ -24,7 +24,7 @@ void MyTree::drawCircle(MyNode * node, int radius) {
     const char* font_path = "C:/Users/ET/source/repos/leetcodecpp/x64/Debug/FreeSans.ttf";
     TTF_Font* font = TTF_OpenFont(font_path, 24);
     SDL_Rect rect;
-    get_text_and_rect(node->p->x - 5, node->p->y - 10, node->data, font, &this->texture, &rect);
+    get_text_and_rect(node->p->x - 5, node->p->y - 10, node->val, font, &this->texture, &rect);
     SDL_RenderCopy(renderer, this->texture, NULL, &rect);
 }
 // 绘制图
@@ -76,7 +76,7 @@ void MyTree::drawTree(MyNode* root) {
     const char* font_path = "C:/Users/ET/source/repos/leetcodecpp/x64/Debug/FreeSans.ttf";
     TTF_Font* font = TTF_OpenFont(font_path, 24);
     SDL_Rect rect;
-    get_text_and_rect(root->p->x - 5, root->p->y - 10, root->data, font, &this->texture, &rect);
+    get_text_and_rect(root->p->x - 5, root->p->y - 10, root->val, font, &this->texture, &rect);
     SDL_RenderCopy(renderer, this->texture, NULL, &rect);
     SDL_RenderPresent(renderer);
 }
@@ -100,7 +100,7 @@ void  MyTree::levelOrderTraversal(MyNode* root) {
         drawCircle(tmp, NODE_RADIUS);
         SDL_RenderPresent(renderer);
 
-        cout << tmp->data << " "; // 打印当前节点的值
+        cout << tmp->val << " "; // 打印当前节点的值
         if (tmp->left != nullptr)
         {
             q->offer(tmp->left);
@@ -174,10 +174,10 @@ MyNode* insert(MyNode* root, int value) {
         return new MyNode(value); // 如果当前节点为空，则创建新节点
     }
 
-    if (value < root->data) {
+    if (value < root->val) {
         root->left = insert(root->left, value); // 递归插入到左子树
     }
-    else if (value > root->data) {
+    else if (value > root->val) {
         root->right = insert(root->right, value); // 递归插入到右子树
     }
 
@@ -191,7 +191,7 @@ MyNode* MyTree::addEdgeForBinSearchTree(int v, int w) {
     MyNode* pretmp = nullptr;
     pretmp = tmp;
    
-    if ((vertices[w]->data) < (pretmp->data))
+    if ((vertices[w]->val) < (pretmp->val))
     {
         pretmp->left = vertices[w];
         vertices[w]->p->x = pretmp->p->x - 50;
@@ -221,17 +221,17 @@ MyNode* MyTree::addEdge(int v, int w) {
     MyNode* pretmp = nullptr;
     while (tmp != nullptr) {
         pretmp = tmp;
-        if (tmp->data > vertices[w]->data) {
+        if (tmp->val > vertices[w]->val) {
             tmp = tmp->left;
         }
-        else if (tmp->data < vertices[w]->data)
+        else if (tmp->val < vertices[w]->val)
             tmp = tmp->right;
         else
             return vertices[v];
 
 
     }
-    if ((vertices[w]->data) < (pretmp->data))
+    if ((vertices[w]->val) < (pretmp->val))
     {
         pretmp->left = vertices[w];
         vertices[w]->p->x = pretmp->p->x - 50;
@@ -292,7 +292,7 @@ void MyTree::dfsPreorder(MyNode* root) {
     const char* font_path = "C:/Users/ET/source/repos/leetcodecpp/x64/Debug/FreeSans.ttf";
     TTF_Font* font = TTF_OpenFont(font_path, 24);
     SDL_Rect rect;
-    get_text_and_rect(root->p->x - 5, root->p->y - 10, root->data, font, &this->texture, &rect);
+    get_text_and_rect(root->p->x - 5, root->p->y - 10, root->val, font, &this->texture, &rect);
     SDL_RenderCopy(renderer, this->texture, NULL, &rect);
     std::this_thread::sleep_for(std::chrono::milliseconds(200)); // 延迟显示
 
@@ -302,7 +302,7 @@ void MyTree::dfsPreorder(MyNode* root) {
 }
 
 MyNode* MyTree::lowestCommonAncester(MyNode* root, int p, int q) {
-    if (root == nullptr || root->data == p || root->data == q)
+    if (root == nullptr || root->val == p || root->val == q)
         return root;
     MyNode* l = lowestCommonAncester(root->left, p, q);
     MyNode* r = lowestCommonAncester(root->right, p, q);
@@ -413,7 +413,7 @@ bool MyTree::sumAllPath() {
         for (MyNode* j : i)
         {
            
-            sum = sum * 10 + j->data;
+            sum = sum * 10 + j->val;
             printf("sum=%d\n",sum);
 
             drawCircle(j, NODE_RADIUS);
@@ -430,76 +430,31 @@ bool MyTree::sumAllPath() {
 //leetcode124. Binary Tree Maximum Path Sum
 
 int MyTree::maxPathSum(MyNode* root, vector<vector<MyNode*>>* v, vector < MyNode*>* path) {
-     int tmpmax=0;
-    if (root == nullptr)
-    {
-       
-      
-        return 0;
-    }
-    //path->push_back(root);
-    int leftValue = 0;
-    if (root->left != nullptr)
-    {
-         leftValue=maxPathSum(root->left, v, path);
-      
-    }
+     static int tmpmax=0;
+     if (root == nullptr)
+     {
 
-  
-    int rightValue=0;
-    if (root->right != nullptr)
-    {
-         rightValue = maxPathSum(root->right, v, path);
-       
-   
-    }
-   
-       
-    if (root->data >= 0)
-    {
-        tmpmax += root->data;
-        path->push_back(root);
-        if (leftValue >0)
-        {
-            tmpmax += leftValue;
+         return 0;
+     }
 
-            path->push_back(root->left);
-        }
-        if((rightValue > 0))
-        {
-            tmpmax += rightValue;
 
-            path->push_back(root->left);
-        }
-        
-    }
-    else  
-    {
-               
-        if (leftValue < rightValue )
-        {
-           
-            tmpmax += rightValue;
 
-            path->push_back(root->right);
-        }
-        else
-        {
-            tmpmax += leftValue;
 
-            path->push_back(root->left);
-        }
-    
-    }
+     int     leftValue = maxPathSum(root->left,v, path);
 
-   
-   
-    return  tmpmax;
-  
-    
-   
 
+     int   rightValue = maxPathSum(root->right, v, path);
+
+
+
+     tmpmax = max(tmpmax, max(root->val, root->val + max(leftValue, rightValue)));
+
+
+     return  max(root->val, root->val + max(leftValue, rightValue));
 }
+   
+
+
 
 //leecode Count Complete Tree Nodes
 int MyTree::countNodes(MyNode* root) {
@@ -539,6 +494,7 @@ void MyTree::toLinkedLIst(MyNode* root) {
 
 bool MyTree::showAllPath(MyNode* root,vector<vector<MyNode*>> *v, vector < MyNode*> *path) {
     
+    if (root == nullptr) return false;
     if (root!=nullptr &&root->left== nullptr && root->right == nullptr)
     {
         path->push_back(root);
@@ -548,12 +504,16 @@ bool MyTree::showAllPath(MyNode* root,vector<vector<MyNode*>> *v, vector < MyNod
     }
     path->push_back(root);
     if (root->left != nullptr)
-    {
+   {
         showAllPath(root->left, v, path);
         path->pop_back();
+   
     }
     if (root->right != nullptr)
-     showAllPath(root->right,v,path);
+    {
+        showAllPath(root->right, v, path);
+        path->pop_back();
+    }
 
 }
 
@@ -561,7 +521,9 @@ bool MyTree::showAllPath(MyNode* root,vector<vector<MyNode*>> *v, vector < MyNod
 bool MyTree::hasPathSum(int targetSum) {
     vector<MyNode*> v;
      int sum=0;
+     //method1
     bool flag= pathSum(this->root, targetSum, sum,&v);
+  
     SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255); //red+ 色用于node
     for (MyNode* i : v)
     {
@@ -572,6 +534,7 @@ bool MyTree::hasPathSum(int targetSum) {
     return flag;
 
 }
+
 bool  MyTree::pathSum(MyNode * root,int targetSum,int sum,vector<MyNode*>* v) {
     bool tmp=false;
   //  bool rsum;
@@ -583,7 +546,7 @@ bool  MyTree::pathSum(MyNode * root,int targetSum,int sum,vector<MyNode*>* v) {
     else if (root == nullptr && sum == targetSum)
         return true;
         
-    sum += root->data;
+    sum += root->val;
     v->push_back(root);
 
     tmp= pathSum(root->left, targetSum,sum,v);
@@ -606,9 +569,45 @@ bool  MyTree::pathSum(MyNode * root,int targetSum,int sum,vector<MyNode*>* v) {
   
    
 }
+/*
 
+bool MyTree::pathSum(MyNode* root, int targetSum, int & sum,  vector<MyNode*>* v) {
+    bool tmp = false;
+
+    if (root == nullptr)
+    {
+
+        return false;
+    }
+    sum += root->val;
+    if ((root != nullptr && root->left == nullptr && root->right == nullptr) && sum != targetSum)
+    {
+
+        return false;
+    }
+    else if ((root != nullptr && root->left == nullptr && root->right == nullptr) && sum == targetSum)
+    {
+        
+        return true;
+    }
+      
+
+    
+    v->push_back(root);
+
+
+    bool l = pathSum(root->left, targetSum, sum,v);
+
+    bool r = pathSum(root->right, targetSum, sum,v);
+    v->pop_back();
+    return l == true ? l : r ;
+
+
+
+}
+*/
 MyNode* MyTree::lowestCommonAncestor(MyNode* root, MyNode* p, MyNode* q) {
-    if (root == nullptr || root->data == p->data || root->data == q->data)
+    if (root == nullptr || root->val == p->val || root->val == q->val)
         return root;
     MyNode* left = lowestCommonAncestor(root->left, p, q);
     MyNode* right = lowestCommonAncestor(root->right, p, q);

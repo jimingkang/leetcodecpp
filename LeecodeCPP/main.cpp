@@ -98,12 +98,14 @@ int main(int argc,char ** argv) {
 
 	// test MyTree
 	//MyNode* root = new MyNode(0);
-	//MyTree* p = new MyTree(renderer);
-	//testMyTree(p);
+	//root->left = new MyNode(2);
+	MyTree* p = new MyTree(renderer);
+	testMyTree(p);
 
 
 
-	//test leetcode island issue
+	//test leetcode 
+	// island issue
 	//drawGrid();
 	//int islandCount = countIslands();
 	//std::cout << "Number of islands: " << islandCount << std::endl;
@@ -122,22 +124,56 @@ int main(int argc,char ** argv) {
 	//nums.push_back(0);
 	//nums.push_back(4);
 	//nums.push_back(2);
-
 	//removeElement(nums, 2);
 
-	MyNode* root = new MyNode(1);
-	root->right = new MyNode(5);
-	root->right->left = new MyNode(3);
+	//MyNode* root = new MyNode(1);
+	//root->left = new MyNode(5);
+	//root->right->left = new MyNode(3);
 	//root->right->right = new MyNode(3);
-
-
 	//MyNode* root = new MyNode(236);
 	//root->left = new MyNode(104);
 	//root->right = new MyNode(701);
 	//root->left->right = new MyNode(227);
 	//root->right->right = new MyNode(911);
- 	 int diff=getMinimumDifference(root);
-	 printf("%d\n", diff);
+
+	
+ 	 //int diff=getMinimumDifference(root);
+	 //printf("%d\n", diff);
+
+
+
+
+	//MyNode* root = new MyNode(1);
+	//root->left = new MyNode(5);
+	// MyNode* root2 = new MyNode(1);
+	// root2->right = new MyNode(5);
+	// bool flag=isSameTree(root, root2);
+	// 
+	//MyNode* root = new MyNode(5);
+	//root->left = new MyNode(3);
+	//root->right = new MyNode(6);
+	//root->left->left = new MyNode(2);
+	//root->left->right = new MyNode(4);
+	//root->left->left->left = new MyNode(1);
+//kthSmallest(root, 3);
+
+	/*
+	MyNode* root = new MyNode(1);
+	root->left = new MyNode(-2);
+	root->right = new MyNode(-3);
+	root->left->left = new MyNode(1);
+	root->left->right = new MyNode(3);
+	root->right->left = new MyNode(-2);
+	root->right->left->left = new MyNode(-1);
+	maxPathSum(root);
+	*/
+
+	//MyNode* root = new MyNode(4);
+	//root->left = new MyNode(9);
+	//root->left->left = new MyNode(5);
+	//root->left->right = new MyNode(1);
+	//root->right = new MyNode(3);
+	//sumNumbers(root);
 
 	// 关闭SDL
 	SDL_DestroyRenderer(renderer);

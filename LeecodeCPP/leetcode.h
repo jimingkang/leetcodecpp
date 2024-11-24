@@ -27,3 +27,16 @@ int removeElement(vector<int>& nums, int val);
 
 int getMinimumDifference(MyNode* root);
 void minimumDifference(MyNode* root, int& min);
+
+bool isSameTree(MyNode* p, MyNode* q);
+
+int kthSmallest(MyNode* root, int k);
+void find(MyNode* root, int k);
+
+//leetcode124 bintree(not BST) max path sum
+int maxPathSum(MyNode* root);
+void inOrder(MyNode* root, vector<int> & v);
+
+//leetcode 129
+int sumNumbers(MyNode* root);
+int sumNumber(MyNode* root, int& sum);

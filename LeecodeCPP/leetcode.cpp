@@ -144,15 +144,124 @@ void minimumDifference(MyNode* root, int & min) {
     
        minimumDifference(root->left,min);
        if(pre!=-1)
-       min = std::min(min, abs(root->data - pre));
+       min = std::min(min, abs(root->val - pre));
  
     
-       pre = root->data;
+       pre = root->val;
 
 
        minimumDifference(root->right,min);
     
 
+
+
+}
+bool isSameTree(MyNode* p, MyNode* q) {
+
+    if ((p == nullptr && q == nullptr))
+        return true;
+    else if ((p != nullptr && q == nullptr) && (p == nullptr && q != nullptr))
+        return false;
+    bool flag = true;
+    if((p != nullptr && q != nullptr))
+        flag= p->val == q->val;
+
+
+    return flag&&isSameTree(p->left, q->left) && isSameTree(p->right, q->right);
+}
+int ret;
+int kthSmallest(MyNode* root, int k) {
+  
+    find(root, k);
+    return ret;
+
+
+}
+void find(MyNode* root, int k) {
+    static int cnt;
+    if (root == nullptr)
+        return;
+
+
+    find(root->left, k);
+    cnt++;
+    if (cnt == k)
+        ret = root->val;
+
+    find(root->right, k);
+}
+
+int tmpmax;
+int maxPathSum(MyNode* root) {
+    //method1
+    
+      //  maxV(root);
+      //  return tmpmax;
+
+    int sum = 0;
+    int total = -10000;
+    vector<int> v;
+    inOrder(root, v);
+    for (int item : v) {
+        if (sum < 0)
+            sum = 0;
+        sum =  sum + item;
+        total = max(total, sum);
+
+    }
+    return total;
+}
+
+//method1
+int maxV(MyNode* root) {
+    if (root == nullptr)
+    {
+        return 0;
+    }
+
+    int     leftValue = maxV(root->left);
+    int   rightValue = maxV(root->right);
+
+   // tmpmax = max(tmpmax, max(root->val, root->val + max({ leftValue, rightValue,leftValue + rightValue })));
+
+
+    return  max(root->val, root->val + max(leftValue, rightValue));
+}
+//method2
+void inOrder(MyNode* root, vector<int> & v) {
+    if (root == nullptr)
+        return;
+    inOrder(root->left, v);
+    v.push_back(root->val);
+    inOrder(root->right, v);
+
+}
+
+
+//leetcode 129
+
+int sumNumbers(MyNode* root) {
+    int sum = 0;
+    sumNumber(root, sum);
+    return sum;
+}
+int sumNumber(MyNode* root, int& sum) {
+    if (root == nullptr)
+    {
+        return  0;
+    }
+    if (root != nullptr && root->left == nullptr && root->right == nullptr)
+    {
+        return  root->val;
+    }
+    sum += root->val*10;
+    
+
+    int l = sumNumber(root->left, sum);
+    int r = sumNumber(root->right, sum);
+    sum +=l;
+    sum +=r;
+    return sum;
 
 
 }

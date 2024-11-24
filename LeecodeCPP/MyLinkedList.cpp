@@ -2,7 +2,7 @@
 #include <string>
 void MyLinkedList::addAtHead(int data) {
 	MyNode* tmp = new MyNode();
-	tmp->data = data;
+	tmp->val = data;
 	tmp->next = head;
 	this->head = tmp;
 
@@ -16,7 +16,7 @@ void MyLinkedList::addAtTail(int data) {
 	}
 
 	MyNode* tmp = new MyNode();
-	tmp->data = data;
+	tmp->val = data;
 	tmp->next = nullptr;
 	curr->next = tmp;
 
@@ -132,7 +132,7 @@ void MyLinkedList::drawLinkedList() {
 
     MyNode* current = head;
     while (current != nullptr) {
-        drawNode( x, y, current->data, current->next != nullptr);
+        drawNode( x, y, current->val, current->next != nullptr);
         x += NODE_SPACING;
        current = current->next;
       

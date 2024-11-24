@@ -153,8 +153,12 @@ int testMyTree(MyTree* g) {
 				//printf("common :%d\n", common->data);
 		
 				//example 11
+				
+				//g->root = new MyNode(-2);
+				//g->root->left = new MyNode(2);
+				//g->root->right = new MyNode(-3);
 
-				//g->hasPathSum(75);
+				//g->hasPathSum(-5);
 				
 
 				//example 12
@@ -163,12 +167,18 @@ int testMyTree(MyTree* g) {
 
 
 				//example 13 leetcode129 Sum Root to Leaf Numbers
-				//g->sumAllPath();
+				g->root = new MyNode(4);
+				g->root->left = new MyNode(9);
+				g->root->right = new MyNode(0);
+				g->root->left->left = new MyNode(5);
+				g->root->left->right = new MyNode(1);
+				g->sumAllPath();
 
 				//example 14 leetcode124 Binary Tree Maximum Path Sum
-				/**/g->root = new MyNode(1);
+				/**/
+				//g->root = new MyNode(1);
 				//g->root->left = new MyNode(2);
-				g->root->right = new MyNode(5);
+				//g->root->right = new MyNode(5);
 				//g->root->left->left = new MyNode(3);
 				//g->root->left->right = new MyNode(4);
 				
@@ -177,10 +187,14 @@ int testMyTree(MyTree* g) {
 				g->root->left = new MyNode(2);
 				g->root->right = new MyNode(3);
 				*/
-				//g->root = new MyNode(-2);
-				//g->root->left = new MyNode(-1);
-				//g->maxPathSum();
-
+				/*
+				g->root = new MyNode(1);
+				g->root->left = new MyNode(- 2);
+				g->root->right = new MyNode(-3);
+				g->root->left->left = new MyNode(1);
+				g->root->left->right = new MyNode(3);
+				g->maxPathSum();
+				*/
 
 				///example 15 leetcode 114
 				//g->toLinkedLIst(g->root);
@@ -193,7 +207,7 @@ int testMyTree(MyTree* g) {
 				///example 17 leetcode 236 Lowest Common Ancestor of a Binary Tree
 				//MyNode* p=g->root->right;
 				//MyNode* q = g->root->left->right;
-				g->lowestCommonAncester(g->root,4,5);
+				//g->lowestCommonAncester(g->root,4,5);
 
 				static vector<int>v;
 
@@ -204,7 +218,7 @@ int testMyTree(MyTree* g) {
 					MyNode* tmp = q.front();
 					if (tmp != nullptr)
 					{
-						v.push_back(tmp->data);
+						v.push_back(tmp->val);
 						q.pop();
 						if (tmp->right != nullptr)
 						{

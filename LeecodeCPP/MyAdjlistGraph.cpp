@@ -43,7 +43,7 @@ void MyAdjlistGraph::printGraph() {
     for (int v = 0; v < V; ++v) {
         cout << "\n" << v << "";
         for (auto x : adj[v])
-            cout << " " << x->data;
+            cout << " " << x->val;
         cout << endl;
     }
 }
@@ -75,7 +75,7 @@ void MyAdjlistGraph::drawGraph() {
 		const char* font_path = "C:/Users/ET/source/repos/leetcodecpp/x64/Debug/FreeSans.ttf";
 		TTF_Font* font = TTF_OpenFont(font_path, 24);
 		SDL_Rect rect;
-		get_text_and_rect(vertex->p->x - 5, vertex->p->y - 10, vertex->data, font, &this->texture, &rect);
+		get_text_and_rect(vertex->p->x - 5, vertex->p->y - 10, vertex->val, font, &this->texture, &rect);
 		SDL_RenderCopy(renderer, this->texture, NULL, &rect);
 	}
 
@@ -93,14 +93,14 @@ void MyAdjlistGraph::DFS(MyNode* v) {
 		MyNode* node = s.top();
         s.pop();
 
-        if (!visited[node->data]) {
-            cout << node->data << " ";
-            visited[node->data] = true;
+        if (!visited[node->val]) {
+            cout << node->val << " ";
+            visited[node->val] = true;
         }
 
         // 将邻接节点添加到栈中
-        for (auto i = adj[node->data].rbegin(); i != adj[node->data].rend(); ++i) {
-			if (!visited[(*i)->data]) {
+        for (auto i = adj[node->val].rbegin(); i != adj[node->val].rend(); ++i) {
+			if (!visited[(*i)->val]) {
                 s.push(*i);
             }
         }
@@ -116,14 +116,14 @@ void MyAdjlistGraph::DFS(int startNode) {
 // DFS递归函数，绘制路径
 void MyAdjlistGraph::DFSUtil(MyNode* v, std::vector<bool>& visited) {
 	
-    visited[v->data] = true;
+    visited[v->val] = true;
 	
 
 	//for (int i = 0; i < adj.size(); ++i) {        // 遍历每个节点的邻居列表
 
 	//	for (MyNode* neighbor : adj[i]) {
-			for (MyNode* neighbor : adj[v->data]) {
-			if (!visited[neighbor->data]) {
+			for (MyNode* neighbor : adj[v->val]) {
+			if (!visited[neighbor->val]) {
 				// 绘制从节点v到邻居节点的路径
 				SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255); // 红色路径
 				SDL_RenderDrawLine(renderer, v->p->x, v->p->y, neighbor->p->x, neighbor->p->y);

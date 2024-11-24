@@ -58,7 +58,7 @@ public:
 		MyNode *curr = head;
 		while (curr != nullptr)
 		{
-			cout << curr->data<<" ";
+			cout << curr->val<<" ";
 			curr = curr->next;
 		}
 	}
